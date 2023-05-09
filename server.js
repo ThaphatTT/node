@@ -68,6 +68,65 @@ app.delete('/employee/delete', function (req, res, next) {
   );
 })
 
+app.get('/post', function (req, res, next) {
+  connection.query(
+    'SELECT * FROM `post`',
+    function(err, results, fields) {
+      res.json(results);
+    }
+  );
+})
+
+app.get('/post/:id', function (req, res, next) {
+  const id = req.params.id;
+  connection.query(
+    'SELECT * FROM `post` WHERE `id` = ?',
+    [id],
+    function(err, results) {
+      res.json(results);
+    }
+  );
+})
+
+app.post('/post', function (req, res, next) {
+  connection.query(
+    'INSERT INTO `post`(`fname`, `lname`, `idcard`, `username`, `password`, `email`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [req.body.fname, req.body.lname, req.body.idcard, req.body.username, req.body.password, req.body.email, req.body.avatar],
+    function(err, results) {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to add employee' });
+        return;
+      }
+      res.json(results);
+    }
+  );
+});
+
+app.put('/post/update', function (req, res, next) {
+  connection.query(
+    'UPDATE `post` SET `fname`= ?, `lname`= ?, `idcard`= ?, `username`= ?, `password`= ?, `email`= ?, `avatar`= ? WHERE id = ?',
+    [req.body.fname, req.body.lname, req.body.idcard, req.body.username, req.body.password, req.body.email, req.body.avatar, req.body.id],
+    function(err, results) {
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.json({ message: 'post updated successfully' });
+      }
+    }
+  );
+});
+
+app.delete('/post/delete', function (req, res, next) {
+  connection.query(
+    'DELETE FROM `post` WHERE id = ?',
+    [req.body.id],
+    function(err, results) {
+      res.json(results);
+    }
+  );
+})
+
 app.listen(5000, function () {
   console.log('CORS-enabled web server listening on port 5000')
 })
