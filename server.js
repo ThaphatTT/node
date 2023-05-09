@@ -50,9 +50,9 @@ app.put('/employee/:id', function (req, res, next) {
     [req.body.fname, req.body.lname, req.body.idcard, req.body.username, req.body.password, req.body.email, req.body.avatar, req.params.id],
     function(err, results) {
       if (err) {
-        res.status(500).json(err);
+        res.status(500).json({ error: err });
       } else {
-        res.json(results);
+        res.json({ message: 'Employee updated successfully' });
       }
     }
   );
