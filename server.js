@@ -58,7 +58,7 @@ app.put('/employee/update', function (req, res, next) {
   );
 });
 
-app.delete('/employee', function (req, res, next) {
+app.delete('/employee/delect', function (req, res, next) {
   connection.query(
     'DELETE FROM `employee` WHERE id = ?',
     [req.body.id],
