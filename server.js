@@ -90,12 +90,12 @@ app.get('/post/:id', function (req, res, next) {
 
 app.post('/post', function (req, res, next) {
   connection.query(
-    'INSERT INTO `post`(`fname`, `lname`, `idcard`, `username`, `password`, `email`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [req.body.fname, req.body.lname, req.body.idcard, req.body.username, req.body.password, req.body.email, req.body.avatar],
+    'INSERT INTO `post`(`users`, `topic`, `typelift`, `description`, `image`) VALUES (?, ?, ?, ?, ?)',
+    [req.body.users, req.body.topic, req.body.typelift, req.body.description, req.body.image],
     function(err, results) {
       if (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to add employee' });
+        res.status(500).json({ error: 'Failed to add post' });
         return;
       }
       res.json(results);
@@ -103,10 +103,11 @@ app.post('/post', function (req, res, next) {
   );
 });
 
+
 app.put('/post/update', function (req, res, next) {
   connection.query(
-    'UPDATE `post` SET `fname`= ?, `lname`= ?, `idcard`= ?, `username`= ?, `password`= ?, `email`= ?, `avatar`= ? WHERE id = ?',
-    [req.body.fname, req.body.lname, req.body.idcard, req.body.username, req.body.password, req.body.email, req.body.avatar, req.body.id],
+    'UPDATE `post` SET `users`= ?, `topic`= ?, `typelift`= ?, `description`= ?, `image`= ? WHERE id = ?',
+    [req.body.users, req.body.topic, req.body.typelift, req.body.description, req.body.image, req.body.id],
     function(err, results) {
       if (err) {
         res.status(500).json({ error: err });
