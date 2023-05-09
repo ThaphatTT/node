@@ -9,19 +9,19 @@ var app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get('/users', function (req, res, next) {
+app.get('/employee', function (req, res, next) {
   connection.query(
-    'SELECT * FROM `users`',
+    'SELECT * FROM `employee`',
     function(err, results, fields) {
       res.json(results);
     }
   );
 })
 
-app.get('/users/:id', function (req, res, next) {
+app.get('/employee/:id', function (req, res, next) {
   const id = req.params.id;
   connection.query(
-    'SELECT * FROM `users` WHERE `id` = ?',
+    'SELECT * FROM `employee` WHERE `id` = ?',
     [id],
     function(err, results) {
       res.json(results);
