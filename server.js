@@ -44,7 +44,7 @@ app.post('/employee', function (req, res, next) {
   );
 });
 
-app.put('/employee/:id', function (req, res, next) {
+app.put('/employee', function (req, res, next) {
   connection.query(
     'UPDATE `employee` SET `fname`= ?, `lname`= ?, `idcard`= ?, `username`= ?, `password`= ?, `email`= ?, `avatar`= ? WHERE id = ?',
     [req.body.fname, req.body.lname, req.body.idcard, req.body.username, req.body.password, req.body.email, req.body.avatar, req.params.id],
