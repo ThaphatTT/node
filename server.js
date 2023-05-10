@@ -91,7 +91,7 @@ app.get('/post/:id', function (req, res, next) {
 app.post('/post', function (req, res, next) {
   connection.query(
     'INSERT INTO `post`(`users`, `topic`, `typelift`, `description`, `image`) VALUES (?, ?, ?, ?, ?)',
-    [req.body.users, req.body.topic, req.body.typelift, req.body.description, req.body.image],
+    [req.body.users, req.body.topic, req.body.typelift, req.body.description, req.body.image.join(',')],
     function(err, results) {
       if (err) {
         console.error(err);
