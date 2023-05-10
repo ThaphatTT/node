@@ -77,6 +77,15 @@ app.get('/post', function (req, res, next) {
   );
 })
 
+app.get('/post/desc', function (req, res, next) {
+  connection.query(
+    'SELECT * FROM `post` ORDER BY id DESC',
+    function(err, results, fields) {
+      res.json(results);
+    }
+  );
+})
+
 app.get('/post/:id', function (req, res, next) {
   const id = req.params.id;
   connection.query(
