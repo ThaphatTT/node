@@ -39,7 +39,7 @@ app.post('/employee', function (req, res, next) {
         res.status(500).json({ error: 'Failed to add employee' });
         return;
       }
-      res.json(results);
+      res.json({ message: 'Employee Create successfully' });
     }
   );
 });
