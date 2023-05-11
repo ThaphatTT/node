@@ -137,6 +137,32 @@ app.delete('/post/delete', function (req, res, next) {
   );
 })
 
+app.post('/login', function (req, res, next) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  connection.query(
+    'SELECT * FROM employee WHERE username = ? AND password = ?',
+    [username, password],
+    function(err, results) {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to login' });
+        return;
+      }
+
+      if (results.length === 0) {
+        res.status(401).json({ error: 'Invalid username or password' });
+        return;
+      }
+
+      // ถ้า username และ password ถูกต้อง ให้ส่งคืนสถานะล็อกอิน (authenticated)
+      res.json({ message: 'Login successful' });
+    }
+  );
+});
+
+
 app.listen(5000, function () {
   console.log('CORS-enabled web server listening on port 5000')
 })
