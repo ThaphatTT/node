@@ -52,7 +52,7 @@ app.put('/employee/update', function (req, res, next) {
       if (err) {
         res.status(500).json({ error: err });
       } else {
-        res.json({ message: 'Employee updated successfully' });
+        res.json({ message: 'Update Employee successfully' });
       }
     }
   );
@@ -107,7 +107,9 @@ app.post('/post', function (req, res, next) {
         res.status(500).json({ error: 'Failed to add post' });
         return;
       }
-      res.json(results);
+      else {
+      res.json({ message: 'Create Post successfully' });
+    }
     }
   );
 });
@@ -121,7 +123,7 @@ app.put('/post/update', function (req, res, next) {
       if (err) {
         res.status(500).json({ error: err });
       } else {
-        res.json({ message: 'post updated successfully' });
+        res.json({ message: 'Update post successfully' });
       }
     }
   );
