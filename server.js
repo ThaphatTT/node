@@ -4,7 +4,7 @@ require('dotenv').config()
 
 const mysql = require('mysql2')
 const connection = mysql.createConnection(process.env.DATABASE_URL)
-
+const jwt = require('jsonwebtoken');
 var app = express()
 app.use(cors())
 app.use(express.json())
@@ -156,8 +156,11 @@ app.post('/login', function (req, res, next) {
         return;
       }
 
-      // ถ้า username และ password ถูกต้อง ให้ส่งคืนสถานะล็อกอิน (authenticated)
-      res.json({ message: 'Login successful' });
+      // สร้าง Token ด้วย JWT
+      const token = jwt.sign({ username }, 'secret_key');
+
+      // ส่ง Token กลับไปยัง Frontend
+      res.json({ message: 'Login successful', token });
     }
   );
 });
