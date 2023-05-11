@@ -158,10 +158,9 @@ app.post('/login', function (req, res, next) {
         return;
       }
 
-      // สร้าง Token ด้วย JWT
       const token = jwt.sign({ username }, 'secret_key');
 
-      // ส่ง Token กลับไปยัง Frontend
+
       res.json({ message: 'Login successful', token });
     }
   );
