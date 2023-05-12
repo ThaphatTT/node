@@ -63,7 +63,11 @@ app.delete('/employee/delete', function (req, res, next) {
     'DELETE FROM `employee` WHERE id = ?',
     [req.body.id],
     function(err, results) {
-      res.json(results);
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.json({ message: 'Delete Employee successfully' });
+      }
     }
   );
 })
@@ -134,7 +138,11 @@ app.delete('/post/delete', function (req, res, next) {
     'DELETE FROM `post` WHERE id = ?',
     [req.body.id],
     function(err, results) {
-      res.json(results);
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.json({ message: 'Delete post successfully' });
+      }
     }
   );
 })
