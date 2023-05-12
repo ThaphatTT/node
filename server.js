@@ -107,9 +107,7 @@ app.post('/post', function (req, res, next) {
     [req.body.users, req.body.topic, req.body.typelift, req.body.description, req.body.image.join(',')],
     function(err, results) {
       if (err) {
-        console.error(err);
         res.status(500).json({ error: 'Failed to add post' });
-        return;
       }
       else {
       res.json({ message: 'Create Post successfully' });
